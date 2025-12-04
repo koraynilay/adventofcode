@@ -9,7 +9,7 @@ fixEsc xs = (snd a1)*10 + (snd a2)
            | otherwise = mx
         a2 | fst mx == ((length ss)-1) = mx
            | otherwise = (bb ss)!!0
-        bb (c:cc) = reverse $ sortOn snd $ filter (\(x,y) -> x > (fst a1)) cc
+        bb (c:cc) = filter (\(x,y) -> x > (fst a1)) cc
 
 addIndex :: [Integer] -> [(Int, Integer)]
 addIndex = addIndexAux 0
