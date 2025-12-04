@@ -22,15 +22,3 @@ main :: IO ()
 main = do
     file <- readFile "input.txt"
     print $ sum $ map f $ lines file
-
-{- logic of the thing:
-
-if ss!!0 is last
-   a1 = ss!!1
-   a2 = ss!!0
-
-if ss!!0 is not last
-   a1 = ss!!0
-   a2 = filter (> (fst a1)) (cc)
-
--}
