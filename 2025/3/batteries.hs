@@ -1,22 +1,20 @@
 import Data.List
 
-fixEsc :: [(Int,Integer)] -> Integer
-fixEsc xs = (snd a1)*10 + (snd a2)
+fixEsc :: [(Integer,Int)] -> Integer
+fixEsc xs = (fst a1)*10 + (fst a2)
   where
-        ss = reverse $ sortOn snd $ reverse xs
-        mx = ss!!0
-        a1 | fst mx == ((length ss)-1) = ss!!1
-           | otherwise = mx
-        a2 | fst mx == ((length ss)-1) = mx
-           | otherwise = (bb ss)!!0
-        bb (c:cc) = filter (\(x,y) -> x > (fst a1)) cc
+        a1 = maxf fst $ reverse $ init xs
+        a2 = maxf fst $ drop ((snd a1)+1) xs
 
-addIndex :: [Integer] -> [(Int, Integer)]
+maxf :: Ord b => (a -> b) -> [a] -> (a)
+maxf f = head . reverse . sortOn f
+
+addIndex :: [Integer] -> [(Integer,Int)]
 addIndex = addIndexAux 0
 
-addIndexAux :: Int -> [Integer] -> [(Int, Integer)]
+addIndexAux :: Int -> [Integer] -> [(Integer,Int)]
 addIndexAux _ [] = []
-addIndexAux i (x:xs) = (i,x) : (addIndexAux (i+1) xs)
+addIndexAux i (x:xs) = (x,i) : (addIndexAux (i+1) xs)
 
 f line = fixEsc $ addIndex $ map (read.pure::Char->Integer) line
 
