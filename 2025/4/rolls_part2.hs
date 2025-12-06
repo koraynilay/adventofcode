@@ -1,5 +1,8 @@
 import Control.Lens
 
+-- iterates through the matrix and for each position occupied by a roll ('@') counts how many rolls
+-- are adjacient, if there are less than 4 then the roll is accessible to the forklift
+-- returns the list of positions (i,j) of those rolls instead of just counting them
 findRolls :: [[Char]] -> [(Int,Int)]
 findRolls m = findRollsMatrix $ (length m)-1
   where
