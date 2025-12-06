@@ -1,6 +1,7 @@
 import Data.List
 import Data.List.Split
 
+-- creates list of fresh ingredients for the [s..e] range
 checkIngredients :: [Integer] -> Integer -> Integer -> [Integer]
 checkIngredients [] _ _ = []
 checkIngredients (x:xs) s e | isFresh x = x : checkIngredients xs s e
@@ -15,6 +16,8 @@ getIngredients ("":xs) = convIngridients xs
         convIngridients (x:xs) = (read x::Integer) : convIngridients xs
 getIngredients (x:xs)  = getIngredients xs
 
+-- `is` is the ingredients list, this function will make a list of all the fresh
+-- ingredients for all the ranges, with duplicates (which will need to be removed after)
 checkRanges :: [Integer] -> [String] -> [Integer]
 checkRanges _ ("":ls) = []
 checkRanges is (l:ls) = checkIngredients is start end ++ checkRanges is ls
