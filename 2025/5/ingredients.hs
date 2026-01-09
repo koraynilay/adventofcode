@@ -26,15 +26,9 @@ checkRanges is (l:ls) = checkIngredients is start end ++ checkRanges is ls
         start = read (range!!0)::Integer
         end = read (range!!1)::Integer
 
--- Source - https://stackoverflow.com/a/16109302
--- Posted by scvalex, modified by community. See post 'Timeline' for change history
--- Retrieved 2025-12-06, License - CC BY-SA 3.0
-rmdups :: (Ord a) => [a] -> [a]
-rmdups = map head . group . sort
-
 main :: IO ()
 main = do
         file <- readFile "input.txt"
         let ll = lines file
         let is = getIngredients ll
-        print $ length $ rmdups $ checkRanges is ll
+        print $ length $ nub $ checkRanges is ll
